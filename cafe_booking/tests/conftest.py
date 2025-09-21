@@ -2,6 +2,7 @@ from typing import AsyncGenerator, Generator
 
 import pytest
 from asgi_lifespan import LifespanManager
+from cafe_booking.web.application import get_app
 from fakeredis.aioredis import FakeRedis
 from fastapi import FastAPI
 from httpx import AsyncClient
@@ -16,7 +17,6 @@ from common.token_cache.tests.conftest import token_cache_close, token_cache_ini
 
 from configuration import clients
 from configuration.settings import Settings, settings
-from store.web.application import get_app
 
 services_mocks = {
     "service_db_pool": (service_db_pool_init, service_db_pool_close),

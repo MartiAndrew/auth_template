@@ -1,16 +1,8 @@
-from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import ORJSONResponse
-from starlette import status
-from starlette.requests import Request
-
-from common.locale.localization import locale_gettext
-
-from store.web.error_responses import (
+from cafe_booking.web.error_responses import (
     PARAMS_MISSING_ERR_CODE,
     PARAMS_VALIDATION_ERR_CODE,
 )
-from store.web.errors import (
+from cafe_booking.web.errors import (
     FloatValidationError,
     IntegerValidationError,
     ListValidationError,
@@ -18,6 +10,13 @@ from store.web.errors import (
     StringValidationError,
     UuidValidationError,
 )
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import ORJSONResponse
+from starlette import status
+from starlette.requests import Request
+
+from common.locale.localization import locale_gettext
 
 custom_type_validation_mapping = {
     "float_parsing": FloatValidationError,

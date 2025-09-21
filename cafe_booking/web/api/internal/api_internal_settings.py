@@ -1,8 +1,8 @@
+from cafe_booking.web.api.internal.router import internal_router
 from fastapi import HTTPException
 from starlette import status
 
 from configuration.settings import Settings, settings
-from store.web.api.internal.router import internal_router
 
 
 @internal_router.get(

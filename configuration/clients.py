@@ -2,9 +2,11 @@ import asyncio
 from typing import Any, Coroutine, Self, TypeVar
 
 import psycopg_pool
+from common.sqlalchemy.sqlalchemy_db_health import sqlalchemy_db_health
 from loguru import logger
 from pydantic import BaseModel, ConfigDict
 from redis.asyncio import ConnectionPool
+from sqlalchemy.ext.asyncio import AsyncEngine
 
 from common.constance.lifetime import setup_constance, stop_constance
 from common.elastic.lifetime import setup_elasticsearch, stop_elasticsearch
@@ -101,7 +103,7 @@ class WebClientsState(BaseClientState):
     """Класс для хранения подключенных клиентов в web lifetime."""
 
     # Не удалять строчку, по ней идет поиск
-    service_db_pool: psycopg_pool.AsyncConnectionPool
+    sqlalchemy_engine: AsyncEngine
 
     def get_funcs_for_health_check(self):
         """
@@ -114,7 +116,7 @@ class WebClientsState(BaseClientState):
 
         :return: Список функций.
         """
-        return [service_db_health(self.service_db_pool)]
+        return [sqlalchemy_db_health(self.sqlalchemy_engine)]
 
 
 class TaskiqClientsState(BaseClientState):

@@ -1,12 +1,12 @@
 from pathlib import Path
 
 from asgi_correlation_id import CorrelationIdMiddleware
+from cafe_booking.web import lifetime
+from cafe_booking.web.api.router import api_router
+from cafe_booking.web.exception_handlers import validation_exception_handler
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import ORJSONResponse
-from prometheus_fastapi_instrumentator.instrumentation import (
-    PrometheusFastApiInstrumentator,
-)
 from pydantic_core import ValidationError
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.staticfiles import StaticFiles
@@ -17,9 +17,6 @@ from common.logging.logging import LoggerMiddleware, init_logger
 from common.sentry.sentry import init_sentry
 
 from configuration.constants import SERVICE_NAME_LOWER
-from store.web import lifetime
-from store.web.api.router import api_router
-from store.web.exception_handlers import validation_exception_handler
 
 WEB_APP_ROOT = Path(__file__).parent
 
@@ -76,9 +73,6 @@ def get_app() -> FastAPI:
     """
     app = init_app()
 
-    PrometheusFastApiInstrumentator(should_group_status_codes=False).instrument(
-        app,
-    ).expose(app, should_gzip=True, name="prometheus_metrics")
     app.add_middleware(LoggerMiddleware)
     app.add_middleware(BaseHTTPMiddleware, dispatch=HeadersMiddleware())
     app.add_middleware(CorrelationIdMiddleware, header_name="X-Request-ID")

@@ -1,5 +1,4 @@
 import json
-from importlib import metadata
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -13,7 +12,7 @@ from configuration.app_settings.auth_settings import AuthSettings
 from configuration.app_settings.locale_settings import LocaleSettings
 from configuration.app_settings.logging_settings import LoggingSettings
 from configuration.app_settings.sentry_settings import SentrySettings
-from configuration.app_settings.service_db_settings import ServiceDbSettings
+from configuration.app_settings.sqlalchemy_db_settings import SQLAlchemyDbSettings
 from configuration.app_settings.telemetry_settings import TelemetrySettings
 from configuration.app_settings.web_settings import WebSettings
 from configuration.constants import ENV_PREFIX
@@ -61,7 +60,7 @@ class Settings(BaseSettings):
     locale: LocaleSettings = LocaleSettings()
     # Не удалять строчку, по ней идет поиск
 
-    service_db: ServiceDbSettings = ServiceDbSettings()
+    sqlalchemy_db: SQLAlchemyDbSettings = SQLAlchemyDbSettings()
 
     if TYPE_CHECKING:  # noqa: WPS604
         # TYPE_CHECKING elasticsearch
@@ -70,12 +69,10 @@ class Settings(BaseSettings):
         )
 
         elasticsearch: ElasticsearchSettings = ElasticsearchSettings()
-        # TYPE_CHECKING sqlalchemy
-        from configuration.app_settings.sqlalchemy_db_settings import (
-            SQLAlchemyDbSettings,
-        )
+        # TYPE_CHECKING service_db
+        from configuration.app_settings.service_db_settings import ServiceDbSettings
 
-        sqlalchemy_db: SQLAlchemyDbSettings = SQLAlchemyDbSettings()
+        service_db: ServiceDbSettings = ServiceDbSettings()
         # TYPE_CHECKING rabbitmq
         from configuration.app_settings.rabbitmq_settings import RabbitSettings
 

@@ -1,9 +1,8 @@
+from cafe_booking.web.api.monitoring.router import monitoring_router
 from fastapi import HTTPException
 from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse
-
-from store.web.api.monitoring.router import monitoring_router
 
 
 @monitoring_router.get("/health")

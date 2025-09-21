@@ -1,13 +1,12 @@
 from pathlib import Path
 
+from cafe_booking.web.exceptions import OrderCheckViolationError, OrderNotFoundError
 from psycopg.errors import ForeignKeyViolation
 from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 from pydantic import BaseModel, Field, NonNegativeInt, TypeAdapter
 
 from common.service_db.base_service_db_queries import BaseServiceDbQuery
-
-from store.web.exceptions import OrderCheckViolationError, OrderNotFoundError
 
 SQL_ADD_ITEM_TO_ORDER = (
     Path(__file__)

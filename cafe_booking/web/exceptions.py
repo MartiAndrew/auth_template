@@ -1,13 +1,12 @@
-from starlette import status
-
-from common.errors.exceptions import ServiceError
-from common.errors.schema import ErrorResponse, ErrResponseBody
-
-from store.web.error_responses import (  # noqa: WPS235
+from cafe_booking.web.error_responses import (  # noqa: WPS235
     PARAMS_VALIDATION_ERR_CODE,
     order_check_violation,
     order_not_found,
 )
+from starlette import status
+
+from common.errors.exceptions import ServiceError
+from common.errors.schema import ErrorResponse, ErrResponseBody
 
 
 class OrderNotFoundError(ServiceError):

@@ -2,7 +2,7 @@
 
 case $1 in
     start_app)
-        python store/web/main.py
+        python cafe_booking/web/main.py
     ;;
     shell)
         bash
@@ -11,24 +11,24 @@ case $1 in
         sqlfluff fix -d postgres -t placeholder --processes 0
     ;;
     mypy)
-        mypy ./store/
+        mypy ./cafe_booking/
     ;;
     pytest)
-        pytest -v -W ignore:ResourceWarning,error ./store/
+        pytest -v -W ignore:ResourceWarning,error ./cafe_booking/
     ;;
     flake8)
-        flake8 --count ./store/
+        flake8 --count ./cafe_booking/
     ;;
     black)
-        black --check ./store/
+        black --check ./cafe_booking/
     ;;
     isort)
-        isort ./store/
+        isort ./cafe_booking/
     ;;
     help) echo -e "
         Usage: $0 ARG
         Please use one from next arguments:
-            'start_app' - start store application
+            'start_app' - start cafe_booking application
             'shell' - run shell into docker container of an application
             'format' - start formating Ruff linter
             'sqlfluff' - start linter SqlFluff
@@ -38,5 +38,5 @@ case $1 in
             'black' - Check code formatting using Black
             'isort' - Run isort for import sorting"
     ;;
-    *) python store/web/main.py
+    *) python cafe_booking/web/main.py
 esac

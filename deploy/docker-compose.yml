@@ -1,53 +1,33 @@
 version: '3.7'
 
-x-common-variables: &common-env-variables
-  STORE_WEB_HOST: 0.0.0.0
-  STORE_SERVICEDB_HOST: store-pg-db
-  STORE_SERVICEDB_PORT: 5432
-  STORE_SERVICEDB_USER: store
-  STORE_SERVICEDB_PASSWORD: store
-  STORE_SERVICEDB_BASE_NAME: store
-
 services:
   api:
     build:
       context: .
       dockerfile: ./deploy/Dockerfile
-    image: store:latest
-    container_name: store
+    image: booking:latest
+    container_name: cafe_booking
     restart: always
     volumes:
       - .:/app/src
     ports:
       - 8000:8000
-    environment: *common-env-variables
+    env_file:
+      - ../.env
     depends_on:
       - pg_db
 
   pg_db:
     image: postgres:13
-    container_name: store-pg-db
-    environment:
-      - POSTGRES_PASSWORD=store
-      - POSTGRES_USER=store
-      - POSTGRES_DB=store
+    container_name: booking-pg-db
+    env_file:
+      - ../.env
     volumes:
-      - store-pd-db-data:/var/lib/postgresql/data
+      - booking-pd-db-data:/var/lib/postgresql/data
     restart: always
     ports:
       - "5435:5432"
 
-  pg_migrator:
-    container_name: pg_migrator
-    image: store:latest
-    command: python common/service_db/migrator.py upgrade
-    restart: "no"
-    volumes:
-      - .:/app/src
-    environment: *common-env-variables
-    depends_on:
-      - pg_db
-
 volumes:
-  store-pd-db-data:
-    name: store-pg-db-data
+  booking-pd-db-data:
+    name: booking-pg-db-data

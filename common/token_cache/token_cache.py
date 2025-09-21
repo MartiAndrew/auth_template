@@ -11,7 +11,7 @@ from configuration.settings import settings
 class TokenCacheService:
     """Сервис для работы с кешом токенов."""
 
-    PREFIX: str = "STORE://jtis"
+    PREFIX: str = "BOOKING://jtis"
 
     def __init__(
         self,

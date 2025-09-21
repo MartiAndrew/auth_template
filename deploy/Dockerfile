@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 COPY pyproject.toml poetry.lock /app/src/
 WORKDIR /app/src
@@ -11,4 +11,4 @@ COPY . /app/src/
 
 RUN poetry install
 
-CMD ["python", "store/web/main.py"]
+CMD ["python", "cafe_booking/web/main.py"]

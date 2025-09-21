@@ -1,8 +1,8 @@
 from common.utils.paths import PROJECT_ROOT
 
-ENV_PREFIX = "STORE_"
-SERVICE_NAME_UPPER = "STORE"
-SERVICE_NAME_LOWER = "store"
+ENV_PREFIX = "BOOKING_"
+SERVICE_NAME_UPPER = "BOOKING"
+SERVICE_NAME_LOWER = "cafe_booking"
 SERVICE_PATH = PROJECT_ROOT.joinpath(SERVICE_NAME_LOWER)
 SETTINGS_PATH = PROJECT_ROOT.joinpath("configuration/settings.py")
 MIGRATION_PATH = PROJECT_ROOT.joinpath(f"{SERVICE_NAME_LOWER}/db/service_db/migrations")

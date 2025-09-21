@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "store"
+name = "cafe_booking"
 version = "0.1.0"
 description = ""
 authors = [
@@ -15,7 +15,7 @@ name = "PyPI"
 priority = "primary"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 fastapi = "^0.103.1"
 uvicorn = "^0.23.2"
 pydantic = "^2.4.1"
@@ -30,7 +30,6 @@ aio-pika = "9.3.0"
 httpx = "^0.25.0"
 PyJWT = "^2.8.0"
 dnspython = "^2.4.2"
-prometheus-client = "^0.17.1"
 boto3 = "1.28.55"
 python-multipart = "^0.0.6"
 orjson = "^3.9.7"
@@ -40,24 +39,16 @@ redis = "^5.0.1"
 types-redis = "^4.6.0.7"
 bandit = "1.7.5"
 taskiq-aio-pika = "^0.4.0"
-sentry-sdk = {extras = ["fastapi"], version = "^1.31.0"}
 fastapi-localization = "^0.0a2.dev3"
-opentelemetry-sdk = {version = "1.20.0", allow-prereleases = true}
-opentelemetry-exporter-otlp = {version = "1.20.0", allow-prereleases = true}
-opentelemetry-instrumentation = "^0.41b0"
-opentelemetry-instrumentation-redis = "^0.41b0"
-opentelemetry-api = {version = "1.20.0", allow-prereleases = true}
-opentelemetry-instrumentation-fastapi = "^0.41b0"
 stackprinter = "^0.2.10"
 asgi-correlation-id = "^4.2.0"
 taskiq-dependencies = "^1.4.2"
 taskiq = "0.9.1"
 aiohttp = "^3.8.5"
 psycopg = {version = "3.2.6", extras = ["binary", "pool"]}
-psycopg-pool = "3.2.6"
-prometheus-fastapi-instrumentator = "^6.1.0"
 opentelemetry-instrumentation-logging = "^0.41b0"
-opentelemetry-instrumentation-aio-pika = "^0.41b0"
+sentry-sdk = { extras = ["fastapi"], version = "^1.31.0" }
+psycopg-pool = "3.2.6"
 annotated-types = "^0.7.0"
 pydantic-core = "^2.21.0"
 numpy = "^2.1.2"
@@ -70,6 +61,7 @@ pandas = "^2.2.3"
 sqlalchemy = "^2.0.43"
 elasticsearch = "^9.1.0"
 pbr = "^7.0.1"
+alembic = "^1.16.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
@@ -125,8 +117,8 @@ filterwarnings = [
     "ignore::DeprecationWarning",
 ]
 env = [
-    "STORE_LOGGER_LOG_LEVEL=DEBUG",
-    "STORE_ENVIRONMENT=pytest",
+    "BOOKING_LOGGER_LOG_LEVEL=DEBUG",
+    "BOOKING_ENVIRONMENT=pytest",
 ]
 addopts = [
     "--import-mode=importlib",

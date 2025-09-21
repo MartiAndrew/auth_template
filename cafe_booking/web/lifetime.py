@@ -14,7 +14,6 @@ from common.taskiq.lifetime import setup_taskiq, stop_taskiq
 
 from configuration.clients import WebClientsState
 from configuration.settings import settings
-from store import metrics
 
 
 def register_startup_event(app: FastAPI) -> None:
@@ -64,7 +63,7 @@ def register_exception_handler(  # noqa: WPS231 C901
     """
 
     @app.exception_handler(ServiceError)
-    async def store_exception_handler(  # noqa: WPS430
+    async def booking_exception_handler(  # noqa: WPS430
         request: Request,
         exc: ServiceError,
     ) -> Response:
