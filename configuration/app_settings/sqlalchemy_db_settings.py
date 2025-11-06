@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from yarl import URL
+from sqlalchemy.engine import URL
 
 from common.utils.paths import PROJECT_ROOT
 
@@ -41,19 +41,18 @@ class SQLAlchemyDbSettings(BaseSettings):
     }
 
     @property
-    def url(self) -> str:
+    def url(self) -> URL:
         """
         Собрать URL SQLAlchemy до БД из настроек.
 
         :return: database str URL.
         """
-        return str(
-            URL.build(
-                scheme="postgresql+psycopg",
-                host=self.host,
-                port=self.port,
-                user=self.user,
-                password=self.password,
-                path=f"/{self.base_name}",
-            )
-        )
+        return URL.create(
+                    drivername="postgresql+psycopg",
+                    host=self.host,
+                    port=self.port,
+                    username=self.user,
+                    password=self.password,
+                    database=self.base_name,
+                )
+

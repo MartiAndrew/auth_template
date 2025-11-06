@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./deploy/Dockerfile
-    image: booking:latest
-    container_name: cafe_booking
+    image: tmpauth:latest
+    container_name: tmpauth
     restart: always
     volumes:
       - .:/app/src
@@ -19,15 +19,15 @@ services:
 
   pg_db:
     image: postgres:13
-    container_name: booking-pg-db
+    container_name: tmpauth-pg-db
     env_file:
       - ../.env
     volumes:
-      - booking-pd-db-data:/var/lib/postgresql/data
+      - tmpauth-pd-db-data:/var/lib/postgresql/data
     restart: always
     ports:
-      - "5435:5432"
+      - "5432:5432"
 
 volumes:
-  booking-pd-db-data:
-    name: booking-pg-db-data
+  tmpauth-pd-db-data:
+    name: tmpauth-pg-db-data

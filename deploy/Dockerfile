@@ -11,4 +11,4 @@ COPY . /app/src/
 
 RUN poetry install
 
-CMD ["python", "cafe_booking/web/main.py"]
+CMD ["python", "tmpauth/web/main.py"]

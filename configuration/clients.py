@@ -1,8 +1,6 @@
 import asyncio
 from typing import Any, Coroutine, Self, TypeVar
 
-import psycopg_pool
-from common.sqlalchemy.sqlalchemy_db_health import sqlalchemy_db_health
 from loguru import logger
 from pydantic import BaseModel, ConfigDict
 from redis.asyncio import ConnectionPool
@@ -15,6 +13,7 @@ from common.service_db.lifetime import setup_service_db, stop_service_db
 from common.service_db.service_db_health import service_db_health
 from common.service_redis.lifetime import setup_service_redis, stop_service_redis
 from common.sqlalchemy.lifetime import close_engine, setup_sqlalchemy_engine
+from common.sqlalchemy.sqlalchemy_db_health import sqlalchemy_db_health
 from common.token_cache.lifetime import setup_token_cache_redis, stop_token_cache_redis
 
 ClientState = TypeVar("ClientState")

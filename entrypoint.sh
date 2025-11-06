@@ -2,7 +2,7 @@
 
 case $1 in
     start_app)
-        python cafe_booking/web/main.py
+        python tmpauth/web/main.py
     ;;
     shell)
         bash
@@ -11,26 +11,25 @@ case $1 in
         sqlfluff fix -d postgres -t placeholder --processes 0
     ;;
     mypy)
-        mypy ./cafe_booking/
+        mypy ./tmpauth/
     ;;
     pytest)
-        pytest -v -W ignore:ResourceWarning,error ./cafe_booking/
+        pytest -v -W ignore:ResourceWarning,error ./tmpauth/
     ;;
     flake8)
-        flake8 --count ./cafe_booking/
+        flake8 --count ./tmpauth/
     ;;
     black)
-        black --check ./cafe_booking/
+        black --check ./tmpauth/
     ;;
     isort)
-        isort ./cafe_booking/
+        isort ./tmpauth/
     ;;
     help) echo -e "
         Usage: $0 ARG
         Please use one from next arguments:
-            'start_app' - start cafe_booking application
+            'start_app' - start tmpauth application
             'shell' - run shell into docker container of an application
-            'format' - start formating Ruff linter
             'sqlfluff' - start linter SqlFluff
             'mypy' - start checking type annotation
             'pytest' - running all tests over pytest
@@ -38,5 +37,5 @@ case $1 in
             'black' - Check code formatting using Black
             'isort' - Run isort for import sorting"
     ;;
-    *) python cafe_booking/web/main.py
+    *) python tmpauth/web/main.py
 esac

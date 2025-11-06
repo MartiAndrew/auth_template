@@ -22,7 +22,7 @@ class RabbitSettings(BaseSettings):
     user: types.VaultRabbitStr = types.VaultRabbitStr("guest")
     password: types.VaultRabbitStr = types.VaultRabbitStr("guest")
     prefetch_count: types.VaultRabbitInt = types.VaultRabbitInt(100)
-    booking_exchange: types.VaultRabbitStr = types.VaultRabbitStr("booking")
+    tmpauth_exchange: types.VaultRabbitStr = types.VaultRabbitStr("tmpauth")
     max_channels_size: types.VaultRabbitInt = types.VaultRabbitInt(100)
     max_connections_size: types.VaultRabbitInt = types.VaultRabbitInt(10)
 

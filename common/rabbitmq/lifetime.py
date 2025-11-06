@@ -11,7 +11,7 @@ async def setup_rabbit() -> RabbitConnection:
     """
     return RabbitConnection(
         url=settings.rabbit.url,
-        exchange=settings.rabbit.booking_exchange,
+        exchange=settings.rabbit.tmpauth_exchange,
     )
 
 

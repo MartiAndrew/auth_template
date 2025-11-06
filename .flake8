@@ -79,6 +79,8 @@ ignore =
   WPS235
   ; Found module with too many imported names
   WPS203
+  ; Probable insecure usage of temp file/directory
+  S108
 
 per-file-ignores =
   ; all tests
@@ -126,4 +128,4 @@ exclude =
   ./venv,
   migrations,
   ./var,
-  cli,
+  alembic,

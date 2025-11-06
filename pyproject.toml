@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cafe_booking"
+name = "tmpauth"
 version = "0.1.0"
 description = ""
 authors = [
@@ -37,7 +37,6 @@ gunicorn = "^21.2.0"
 protobuf = "4.24.3"
 redis = "^5.0.1"
 types-redis = "^4.6.0.7"
-bandit = "1.7.5"
 taskiq-aio-pika = "^0.4.0"
 fastapi-localization = "^0.0a2.dev3"
 stackprinter = "^0.2.10"
@@ -62,10 +61,14 @@ sqlalchemy = "^2.0.43"
 elasticsearch = "^9.1.0"
 pbr = "^7.0.1"
 alembic = "^1.16.5"
+prometheus-client = "^0.23.1"
+opentelemetry-sdk = "^1.38.0"
+prometheus-fastapi-instrumentator = "^6.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
 flake8 = "^6.1.0"
+bandit = "1.7.5"
 mypy = "^1.5.1"
 isort = "^5.12.0"
 yesqa = "^1.5.0"
@@ -91,6 +94,7 @@ types-pytz = "^2023.3.1.1"
 sqlfluff = "^3.4.2"
 pytest-xdist = "^3.3.1"
 anyio = "<4.0.0"
+stackprinter = "^0.2.12"
 
 
 [tool.isort]
@@ -117,8 +121,8 @@ filterwarnings = [
     "ignore::DeprecationWarning",
 ]
 env = [
-    "BOOKING_LOGGER_LOG_LEVEL=DEBUG",
-    "BOOKING_ENVIRONMENT=pytest",
+    "TMPAUTH_LOGGER_LOG_LEVEL=DEBUG",
+    "TMPAUTH_ENVIRONMENT=pytest",
 ]
 addopts = [
     "--import-mode=importlib",
