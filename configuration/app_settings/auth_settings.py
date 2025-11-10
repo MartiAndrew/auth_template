@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from common.utils.paths import PROJECT_ROOT
 
 from configuration import types
-from configuration.constants import ENV_PREFIX
+from configuration.constants import ENV_PREFIX, SERVICE_NAME_LOWER
 
 
 class AuthSettings(BaseSettings):
@@ -22,5 +22,9 @@ class AuthSettings(BaseSettings):
     reset_password_token_secret: str = ""
 
     verification_token_secret: str = ""
+
+    #token_url for transport
+    bearer_token_url: str = f"api/{SERVICE_NAME_LOWER}/auth/login"
+
 
 
