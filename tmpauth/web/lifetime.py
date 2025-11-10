@@ -4,9 +4,6 @@ import psycopg_pool
 from fastapi import FastAPI, Request, Response
 from fastapi.encoders import jsonable_encoder
 from loguru import logger
-from prometheus_fastapi_instrumentator.instrumentation import (
-    PrometheusFastApiInstrumentator,
-)
 from starlette import status
 from starlette.responses import JSONResponse
 from tmpauth.web import metrics

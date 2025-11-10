@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 def get_database_strategy(
     access_tokens_db: Annotated[
-        AccessTokenDatabase["AccessToken"],
+        "AccessTokenDatabase[AccessToken]",
         Depends(get_access_tokens_db),
     ],
 ) -> DatabaseStrategy:

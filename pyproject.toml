@@ -65,6 +65,7 @@ prometheus-client = "^0.23.1"
 opentelemetry-sdk = "^1.38.0"
 prometheus-fastapi-instrumentator = "^6.1.0"
 fastapi-users = {extras = ["sqlalchemy"], version = "^15.0.1"}
+fastapi-cache = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"

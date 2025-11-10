@@ -1,10 +1,9 @@
 """Модели БД."""
+
 from tmpauth.db.models.access_token import AccessToken
-from tmpauth.db.models.base_model import Base
 from tmpauth.db.models.user import User
 
 __all__ = [
-    "Base",
     "User",
-    "AccessToken"
+    "AccessToken",
 ]

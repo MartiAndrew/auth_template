@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, Optional
 
-from fastapi_cache import FastAPICache
+# from fastapi_cache import FastAPICache
 from fastapi_users import BaseUserManager, IntegerIDMixin
 from fastapi_users.db import BaseUserDatabase
 from loguru import logger
@@ -20,29 +20,29 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
     reset_password_token_secret = settings.auth.reset_password_token_secret
     verification_token_secret = settings.auth.verification_token_secret
 
-    def __init__(
-        self,
-        user_db: BaseUserDatabase[User, UserIdType],
-        password_helper: Optional["PasswordHelperProtocol"] = None,
-        background_tasks: Optional["BackgroundTasks"] = None,
-    ):
-        super().__init__(user_db, password_helper)
-        self.background_tasks = background_tasks
+    # def __init__(
+    #     self,
+    #     user_db: BaseUserDatabase[User, UserIdType],
+    #     password_helper: Optional["PasswordHelperProtocol"] = None,
+    #     background_tasks: Optional["BackgroundTasks"] = None,
+    # ):
+    #     super().__init__(user_db, password_helper)
+    #     self.background_tasks = background_tasks
 
     async def on_after_register(
         self,
         user: User,
         request: Optional["Request"] = None,
     ):
-        if self.background_tasks:
-            self.background_tasks.add_task(
-                FastAPICache.clear,
-                namespace=settings.cache.namespace.users_list,
-            )
-        else:
-            await FastAPICache.clear(
-                namespace=settings.cache.namespace.users_list,
-            )
+        # if self.background_tasks:
+        #     self.background_tasks.add_task(
+        #         FastAPICache.clear,
+        #         namespace=settings.cache.namespace.users_list,
+        #     )
+        # else:
+        #     await FastAPICache.clear(
+        #         namespace=settings.cache.namespace.users_list,
+        #     )
         logger.warning(
             "User %r has registered.",
             user.id,

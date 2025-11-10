@@ -2,11 +2,10 @@ from typing import TYPE_CHECKING, Annotated
 
 from fastapi import BackgroundTasks, Depends
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
-
 from tmpauth.db.models import AccessToken, User
+from tmpauth.services.authentication.user_manager import UserManager
 
 from common.sqlalchemy.dependencies import get_db_session
-from tmpauth.services.authentication.user_manager import UserManager
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

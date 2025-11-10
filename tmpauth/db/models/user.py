@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 from sqlalchemy.orm import Mapped, mapped_column
-from tmpauth.db.models import Base
+from tmpauth.db.models.base_model import Base
 from tmpauth.db.models.mixins.id_int_pk import IdIntPkMixin
 
 

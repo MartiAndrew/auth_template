@@ -6,7 +6,7 @@ from fastapi_users_db_sqlalchemy.access_token import (
 )
 from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from tmpauth.db.models import Base
+from tmpauth.db.models.base_model import Base
 
 from configuration.types import UserIdType
 
@@ -17,6 +17,8 @@ if TYPE_CHECKING:
 
 
 class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[int]):
+    """AccessToken модель."""
+
     user_id: Mapped[UserIdType] = mapped_column(
         Integer,
         ForeignKey("user.id", ondelete="cascade"),
