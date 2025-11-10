@@ -7,7 +7,7 @@ from configuration.constants import ENV_PREFIX
 
 
 class AuthSettings(BaseSettings):
-    """Настройки приложения."""
+    """Настройки аутентификации приложения."""
 
     model_config = SettingsConfigDict(
         env_prefix=f"{ENV_PREFIX}AUTH_",
@@ -16,8 +16,6 @@ class AuthSettings(BaseSettings):
         extra="ignore",
     )
 
-    # JWT ключ
-    jwt_signing_key: types.VaultLocalStr = types.VaultLocalStr("jwt_signing_key")
     # время жизни access токена
     lifetime_seconds: int = 3600
 
