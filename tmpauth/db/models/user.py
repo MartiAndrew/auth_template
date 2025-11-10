@@ -6,9 +6,6 @@ from fastapi_users_db_sqlalchemy import (
     SQLAlchemyUserDatabase as SQLAlchemyUserDatabaseGeneric,
 )
 from sqlalchemy import DateTime, String, func
-from sqlalchemy.orm import relationship, Mapped
-
-from core.types.user_id import UserIdType
 
 
 from sqlalchemy.orm import Mapped, mapped_column
