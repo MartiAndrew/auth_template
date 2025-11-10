@@ -39,5 +39,5 @@ async def get_user_manager(
 ):
     yield UserManager(
         users_db,
-        background_tasks=background_tasks,
+        # background_tasks=background_tasks,
     )

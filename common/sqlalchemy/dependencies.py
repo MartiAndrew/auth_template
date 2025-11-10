@@ -12,7 +12,7 @@ async def get_db_session(request: Request) -> AsyncGenerator[AsyncSession, None]
 
     :param request: current request.
     """
-    engine: AsyncEngine = request.app.state.sqlalchemy_engine
+    engine: AsyncEngine = request.app.state.clients.sqlalchemy_engine
     session_factory = async_sessionmaker(
         bind=engine,
         expire_on_commit=settings.sqlalchemy_db.expire_on_commit,

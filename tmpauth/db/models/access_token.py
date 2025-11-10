@@ -25,9 +25,9 @@ class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[int]):
         nullable=False,
     )
 
-    user: Mapped["User"] = relationship(
-        back_populates="access_tokens",
-    )
+    # user: Mapped["User"] = relationship(
+    #     back_populates="access_tokens",
+    # )
 
     @classmethod
     def get_db_token(cls, session: "AsyncSession"):

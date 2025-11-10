@@ -1,6 +1,5 @@
 from fastapi import APIRouter
-
-from tmpauth.db.schemas.user import UserCreate, UserRead
+from tmpauth.db.schemas.user import UserCreate, UserRead, UserUpdate
 from tmpauth.services.authentication.auth_backend import authentication_backend
 from tmpauth.services.authentication.fastapi_users import fastapi_users
 

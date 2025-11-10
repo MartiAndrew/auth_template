@@ -10,7 +10,6 @@ from common.constance.lifetime import setup_constance, stop_constance
 from common.elastic.lifetime import setup_elasticsearch, stop_elasticsearch
 from common.rabbitmq.lifetime import setup_rabbit, stop_rabbit
 from common.service_db.lifetime import setup_service_db, stop_service_db
-from common.service_db.service_db_health import service_db_health
 from common.service_redis.lifetime import setup_service_redis, stop_service_redis
 from common.sqlalchemy.lifetime import close_engine, setup_sqlalchemy_engine
 from common.sqlalchemy.sqlalchemy_db_health import sqlalchemy_db_health
