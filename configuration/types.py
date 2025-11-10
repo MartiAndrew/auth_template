@@ -7,3 +7,5 @@ VaultRabbitStr = NewType("VaultRabbitStr", str)
 VaultLocalInt = NewType("VaultLocalInt", int)
 VaultPostgresInt = NewType("VaultPostgresInt", int)
 VaultRabbitInt = NewType("VaultRabbitInt", int)
+
+UserIdType = NewType("UserIdType", int)
