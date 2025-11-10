@@ -20,18 +20,14 @@ def upgrade() -> None:
     """Upgrade schema."""
     op.create_table(
         "user",
-        sa.Column(
-            "nickname", sa.String(length=25), nullable=True, comment="Никнейм"
-        ),
+        sa.Column("nickname", sa.String(length=25), nullable=True, comment="Никнейм"),
         sa.Column(
             "avatar",
             sa.String(length=250),
             nullable=True,
             comment="Ссылка на аватар",
         ),
-        sa.Column(
-            "about", sa.String(length=150), nullable=True, comment="О себе"
-        ),
+        sa.Column("about", sa.String(length=150), nullable=True, comment="О себе"),
         sa.Column(
             "created_at",
             sa.DateTime(timezone=True),

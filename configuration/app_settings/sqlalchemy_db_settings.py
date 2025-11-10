@@ -48,11 +48,10 @@ class SQLAlchemyDbSettings(BaseSettings):
         :return: database str URL.
         """
         return URL.create(
-                    drivername="postgresql+psycopg_async",
-                    host=self.host,
-                    port=self.port,
-                    username=self.user,
-                    password=self.password,
-                    database=self.base_name,
-                )
-
+            drivername="postgresql+psycopg_async",
+            host=self.host,
+            port=self.port,
+            username=self.user,
+            password=self.password,
+            database=self.base_name,
+        )

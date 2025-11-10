@@ -35,7 +35,7 @@ async def drop_db() -> None:
             {"dbname": settings.sqlalchemy_db.base_name},
         )
 
-        drop_db_query = f'DROP DATABASE {settings.sqlalchemy_db.base_name};'
+        drop_db_query = f"DROP DATABASE {settings.sqlalchemy_db.base_name};"
         await conn.execute(text(drop_db_query))
 
     await admin_engine.dispose()
@@ -59,7 +59,7 @@ async def create_db() -> None:
         await drop_db()
 
     async with admin_engine.begin() as conn_create:
-        create_db_query = f'CREATE DATABASE {settings.sqlalchemy_db.base_name};'
+        create_db_query = f"CREATE DATABASE {settings.sqlalchemy_db.base_name};"
         await conn_create.execute(text(create_db_query))
 
     await admin_engine.dispose()

@@ -46,7 +46,5 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     """Downgrade schema."""
-    op.drop_index(
-        op.f("ix_access_token_created_at"), table_name="access_token"
-    )
+    op.drop_index(op.f("ix_access_token_created_at"), table_name="access_token")
     op.drop_table("access_token")

@@ -23,8 +23,5 @@ class AuthSettings(BaseSettings):
 
     verification_token_secret: str = ""
 
-    #token_url for transport
+    # token_url for transport
     bearer_token_url: str = f"{SERVICE_NAME_LOWER}/auth/login"
-
-
-

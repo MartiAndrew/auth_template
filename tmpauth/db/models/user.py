@@ -30,7 +30,6 @@ class User(Base, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
         server_default=func.now(),
     )
 
-
     @classmethod
     def get_db_user(cls, session: "AsyncSession"):
         return SQLAlchemyUserDatabase(session, User)

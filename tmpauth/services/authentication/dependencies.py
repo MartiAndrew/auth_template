@@ -29,7 +29,6 @@ async def get_users_db(
     yield User.get_db_user(session=session)
 
 
-
 async def get_user_manager(
     users_db: Annotated[
         "SQLAlchemyUserDatabase",
