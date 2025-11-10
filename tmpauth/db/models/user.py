@@ -3,10 +3,11 @@ from typing import TYPE_CHECKING
 
 from fastapi_users_db_sqlalchemy import (
     SQLAlchemyBaseUserTable,
-    SQLAlchemyUserDatabase as SQLAlchemyUserDatabaseGeneric,
+    SQLAlchemyUserDatabase,
 )
 from sqlalchemy import DateTime, String, func
-
+if TYPE_CHECKING:
+    from sqlalchemy.ext.asyncio import AsyncSession
 
 from sqlalchemy.orm import Mapped, mapped_column
 from tmpauth.db.models import Base
@@ -30,3 +31,8 @@ class User(Base, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
         comment="Дата создания",
         server_default=func.now(),
     )
+
+
+    @classmethod
+    def get_db_user(cls, session: "AsyncSession"):
+        return SQLAlchemyUserDatabase(session, User)
