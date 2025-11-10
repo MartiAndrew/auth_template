@@ -16,7 +16,9 @@ class AuthSettings(BaseSettings):
         extra="ignore",
     )
 
-    # рубильник проверки токена в кеше токенов
-    token_cache_checking: bool = True
     # JWT ключ
     jwt_signing_key: types.VaultLocalStr = types.VaultLocalStr("jwt_signing_key")
+    # время жизни access токена
+    lifetime_seconds: int = 3600
+
+
