@@ -48,7 +48,7 @@ class Settings(BaseSettings):
 
     # Sentry
     sentry: SentrySettings = SentrySettings()
-    # Logging (зависит от auth)
+    # Logging (зависит от authentication)
     logging: LoggingSettings = LoggingSettings()
     # Телеметрия
     telemetry: TelemetrySettings = TelemetrySettings()

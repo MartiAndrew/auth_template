@@ -1,12 +1,9 @@
-from typing import (
-    TYPE_CHECKING,
-    Annotated,
-)
+from typing import TYPE_CHECKING, Annotated
 
 from fastapi import Depends
+from tmpauth.db.models import AccessToken, User
 
 from common.sqlalchemy.dependencies import get_db_session
-from tmpauth.db.models import AccessToken, User
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

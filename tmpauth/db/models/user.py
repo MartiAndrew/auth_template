@@ -1,11 +1,9 @@
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from fastapi_users_db_sqlalchemy import (
-    SQLAlchemyBaseUserTable,
-    SQLAlchemyUserDatabase,
-)
+from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
 from sqlalchemy import DateTime, String, func
+
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 

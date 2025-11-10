@@ -1,19 +1,16 @@
-from typing import (
-    TYPE_CHECKING,
-    Annotated,
-)
+from typing import TYPE_CHECKING, Annotated
 
 from fastapi import Depends
-from fastapi_users.authentication.strategy.db import (
-    DatabaseStrategy,
-)
+from fastapi_users.authentication.strategy.db import DatabaseStrategy
 
 from configuration.settings import settings
+
 from .dependencies import get_access_tokens_db
 
 if TYPE_CHECKING:
-    from ...db.models import AccessToken
     from fastapi_users.authentication.strategy.db import AccessTokenDatabase
+
+    from ...db.models import AccessToken
 
 
 def get_database_strategy(

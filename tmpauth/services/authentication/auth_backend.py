@@ -1,7 +1,6 @@
 from fastapi_users.authentication import AuthenticationBackend
-
-from tmpauth.services.auth.strategy import get_database_strategy
-from tmpauth.services.auth.transport import bearer_transport
+from tmpauth.services.authentication.strategy import get_database_strategy
+from tmpauth.services.authentication.transport import bearer_transport
 
 authentication_backend = AuthenticationBackend(
     name="access-tokens-db",

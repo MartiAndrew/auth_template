@@ -4,21 +4,15 @@ from fastapi_users_db_sqlalchemy.access_token import (
     SQLAlchemyAccessTokenDatabase,
     SQLAlchemyBaseAccessTokenTable,
 )
-from sqlalchemy import (
-    Integer,
-    ForeignKey,
-)
-from sqlalchemy.orm import (
-    Mapped,
-    mapped_column,
-    relationship,
-)
+from sqlalchemy import ForeignKey, Integer
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from tmpauth.db.models import Base
 
 from configuration.types import UserIdType
-from tmpauth.db.models import Base
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
+
     from common.auth.user import User
 
 

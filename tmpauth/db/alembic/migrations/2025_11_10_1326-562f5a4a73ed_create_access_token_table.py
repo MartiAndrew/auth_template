@@ -8,9 +8,8 @@ Create Date: 2025-11-10 13:26:20.230655
 from typing import Sequence, Union
 
 import fastapi_users_db_sqlalchemy
-from alembic import op
 import sqlalchemy as sa
-
+from alembic import op
 
 revision: str = "562f5a4a73ed"
 down_revision: Union[str, None] = "050d31e4dbfd"
