@@ -9,5 +9,7 @@ auth_router = APIRouter()
 auth_router.include_router(router=fastapi_users.get_auth_router(authentication_backend))
 
 auth_router.include_router(
-    router=fastapi_users.get_register_router(UserRead, UserCreate)
+    router=fastapi_users.get_register_router(UserRead, UserCreate),
 )
+
+auth_router.include_router(router=fastapi_users.get_verify_router(UserRead))

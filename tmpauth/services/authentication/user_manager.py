@@ -63,9 +63,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         request: Optional["Request"] = None,
     ):
         logger.warning(
-            "Verification requested for user %r. Verification token: %r",
-            user.id,
-            token,
+            f"Verification requested for user {user.id}. Verification token: {token}",
         )
         # verification_link = request.url_for("verify_email").replace_query_params(
         #     token=token
