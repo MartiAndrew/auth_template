@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
-from common.sqlalchemy.sqlalchemy_db_health import sqlalchemy_db_health
+from common.auth.create_superuser import create_superuser
 
 from configuration.settings import settings
 
@@ -22,5 +22,6 @@ async def setup_sqlalchemy_engine() -> AsyncEngine:
         pool_size=settings.sqlalchemy_db.pool_size,
         max_overflow=settings.sqlalchemy_db.max_overflow,
     )
-    await sqlalchemy_db_health(engine)
+
+    await create_superuser(engine=engine)
     return engine

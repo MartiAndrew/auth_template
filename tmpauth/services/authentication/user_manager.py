@@ -43,10 +43,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         #     await FastAPICache.clear(
         #         namespace=settings.cache.namespace.users_list,
         #     )
-        logger.warning(
-            "User %r has registered.",
-            user.id,
-        )
+        logger.warning(f"User {user.id} has registered.")
         # await send_new_user_notification(user)
 
     async def on_after_forgot_password(
@@ -56,9 +53,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         request: Optional["Request"] = None,
     ):
         logger.warning(
-            "User %r has forgot their password. Reset token: %r",
-            user.id,
-            token,
+            f"User {user.id} has forgot their password. Reset token: {token}",
         )
 
     async def on_after_request_verify(
@@ -86,10 +81,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         user: User,
         request: Optional["Request"] = None,
     ):
-        logger.warning(
-            "User %r has been verified",
-            user.id,
-        )
+        logger.warning(f"User {user.id} has been verified")
 
         # self.background_tasks.add_task(
         #     send_email_confirmed,

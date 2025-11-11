@@ -2,7 +2,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from common.utils.paths import PROJECT_ROOT
 
-from configuration import types
 from configuration.constants import ENV_PREFIX, SERVICE_NAME_LOWER
 
 

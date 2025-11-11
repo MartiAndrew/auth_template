@@ -22,7 +22,7 @@ class SQLAlchemyDbSettings(BaseSettings):
     user: types.VaultPostgresStr = types.VaultPostgresStr(SERVICE_NAME_LOWER)
     password: types.VaultPostgresStr = types.VaultPostgresStr(SERVICE_NAME_LOWER)
     base_name: types.VaultPostgresStr = types.VaultPostgresStr(SERVICE_NAME_LOWER)
-    echo: bool = True
+    echo: bool = False
     echo_pool: bool = True
     pool_size: int = 5
     max_overflow: int = 10
