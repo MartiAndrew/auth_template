@@ -8,6 +8,7 @@ from tmpauth.db.models import User
 
 from configuration.settings import settings
 from configuration.types import UserIdType
+from tmpauth.services.mailing.send_verification_email import send_verification_email
 
 if TYPE_CHECKING:
     from fastapi import BackgroundTasks, Request
@@ -20,14 +21,14 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
     reset_password_token_secret = settings.auth.reset_password_token_secret
     verification_token_secret = settings.auth.verification_token_secret
 
-    # def __init__(
-    #     self,
-    #     user_db: BaseUserDatabase[User, UserIdType],
-    #     password_helper: Optional["PasswordHelperProtocol"] = None,
-    #     background_tasks: Optional["BackgroundTasks"] = None,
-    # ):
-    #     super().__init__(user_db, password_helper)
-    #     self.background_tasks = background_tasks
+    def __init__(
+        self,
+        user_db: BaseUserDatabase[User, UserIdType],
+        password_helper: Optional["PasswordHelperProtocol"] = None,
+        background_tasks: Optional["BackgroundTasks"] = None,
+    ):
+        super().__init__(user_db, password_helper)
+        self.background_tasks = background_tasks
 
     async def on_after_register(
         self,
@@ -77,11 +78,11 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         logger.warning(
             f"Verification requested for user {user.id}. Verification token: {token}",
         )
-        # verification_link = request.url_for("verify_email").replace_query_params(
-        #     token=token
-        # )
-        # self.background_tasks.add_task(
-        #     send_verification_email,
-        #     user=user,
-        #     verification_link=str(verification_link),
-        # )
+        verification_link = request.url_for("verify_email").replace_query_params(
+            token=token
+        )
+        self.background_tasks.add_task(
+            send_verification_email,
+            user=user,
+            verification_link=str(verification_link),
+        )
