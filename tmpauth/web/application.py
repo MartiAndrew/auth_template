@@ -4,7 +4,9 @@ from asgi_correlation_id import CorrelationIdMiddleware
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import ORJSONResponse
-from prometheus_fastapi_instrumentator import PrometheusFastApiInstrumentator
+from prometheus_fastapi_instrumentator.instrumentation import (
+    PrometheusFastApiInstrumentator,
+)
 from pydantic_core import ValidationError
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.staticfiles import StaticFiles

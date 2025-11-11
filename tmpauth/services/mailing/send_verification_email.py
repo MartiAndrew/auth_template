@@ -1,7 +1,7 @@
 from textwrap import dedent
 
-from jinja_templates import templates
 from tmpauth.db.models import User
+from tmpauth.jinja_templates import templates
 from tmpauth.services.mailing.send_email import send_email
 
 
@@ -21,7 +21,7 @@ async def send_verification_email(
 
         Your site admin,
         © 2025.
-        """
+        """,
     )
 
     template = templates.get_template("mailing/email-verify/verification-request.html")

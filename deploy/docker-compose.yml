@@ -1,6 +1,30 @@
 version: '3.7'
 
+x-common-variables: &common-env-variables
+  TMPAUTH_SQLALCHEMY_HOST: tmpauth-pg-db
+  TMPAUTH_SQLALCHEMY_PORT: 5432
+  TMPAUTH_SQLALCHEMY_USERNAME: tmpauth
+  TMPAUTH_SQLALCHEMY_PASSWORD: tmpauth
+  TMPAUTH_SQLALCHEMY_BASE_NAME: tmpauth
+  
+  TMPAUTH_AUTH_RESET_PASSWORD_TOKEN_SECRET: dcf38976fa88e8bd281c491d180fd2d34f510eb1a9cc57c22f514499430a0f34
+  TMPAUTH_AUTH_VERIFICATION_TOKEN_SECRET: 48683743363d588d7d64d97384366079215c48f6365f2ca36ff4a9d3bd55eadf
+
 services:
+  migrate:
+    build:
+      context: .
+      dockerfile: ./deploy/Dockerfile
+    image: tmpauth:latest
+    container_name: tmpauth-migrate
+    restart: "no"
+    environment: *common-env-variables
+    depends_on:
+      - pg_db
+    command: alembic upgrade head
+    volumes:
+      - .:/app/src
+
   api:
     build:
       context: .
@@ -12,10 +36,10 @@ services:
       - .:/app/src
     ports:
       - 8000:8000
-    env_file:
-      - ./.env
     depends_on:
       - pg_db
+      - migrate
+    environment: *common-env-variables
 
   maildev:
     image: maildev/maildev
@@ -34,13 +58,15 @@ services:
   pg_db:
     image: postgres:13
     container_name: tmpauth-pg-db
-    env_file:
-      - ./.env
     volumes:
       - tmpauth-pd-db-data:/var/lib/postgresql/data
     restart: always
     ports:
-      - "5432:5432"
+      - "5435:5432"
+    environment:
+      - POSTGRES_PASSWORD=tmpauth
+      - POSTGRES_USER=tmpauth
+      - POSTGRES_DB=tmpauth
 
 volumes:
   tmpauth-pd-db-data:

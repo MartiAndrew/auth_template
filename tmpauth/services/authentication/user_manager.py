@@ -1,23 +1,22 @@
 from typing import TYPE_CHECKING, Optional
 
-# from fastapi_cache import FastAPICache
 from fastapi_users import BaseUserManager, IntegerIDMixin
 from fastapi_users.db import BaseUserDatabase
 from loguru import logger
 from tmpauth.db.models import User
+from tmpauth.services.mailing.send_email_confirmed import send_email_confirmed
+from tmpauth.services.mailing.send_verification_email import send_verification_email
 
 from configuration.settings import settings
 from configuration.types import UserIdType
-from tmpauth.services.mailing.send_email_confirmed import send_email_confirmed
-from tmpauth.services.mailing.send_verification_email import send_verification_email
 
 if TYPE_CHECKING:
     from fastapi import BackgroundTasks, Request
     from fastapi_users.password import PasswordHelperProtocol
 
 
-class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
-    """Класс менеджер для работы с пользователями"""
+class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):  # type: ignore
+    """Класс менеджер для работы с пользователями."""
 
     reset_password_token_secret = settings.auth.reset_password_token_secret
     verification_token_secret = settings.auth.verification_token_secret
@@ -80,7 +79,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
             f"Verification requested for user {user.id}. Verification token: {token}",
         )
         verification_link = request.url_for("verify_email").replace_query_params(
-            token=token
+            token=token,
         )
         self.background_tasks.add_task(
             send_verification_email,

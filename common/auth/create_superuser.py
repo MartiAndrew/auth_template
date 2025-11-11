@@ -1,15 +1,16 @@
 import contextlib
 from os import getenv
 
+from fastapi import BackgroundTasks
 from fastapi_users.exceptions import UserAlreadyExists
 from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
-
-from configuration.settings import settings
 from tmpauth.db.models import User
 from tmpauth.db.schemas.user import UserCreate
 from tmpauth.services.authentication.dependencies import get_user_manager, get_users_db
 from tmpauth.services.authentication.user_manager import UserManager
+
+from configuration.settings import settings
 
 get_users_db_context = contextlib.asynccontextmanager(get_users_db)
 get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
@@ -58,10 +59,13 @@ async def create_superuser(
         autocommit=False,
         expire_on_commit=False,
     )
+    background_tasks = BackgroundTasks()
 
     async with session_factory() as session:
         async with get_users_db_context(session) as users_db:
-            async with get_user_manager_context(users_db) as user_manager:
+            async with get_user_manager_context(
+                users_db, background_tasks
+            ) as user_manager:
                 try:
                     await create_user(
                         user_manager=user_manager,

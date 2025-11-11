@@ -17,6 +17,11 @@ async def get_access_tokens_db(
         Depends(get_db_session),
     ],
 ):
+    """
+    Получение доступа к БД с токенами доступа.
+
+    :param session: Сессия БД
+    """
     yield AccessToken.get_db_token(session=session)
 
 
@@ -26,6 +31,11 @@ async def get_users_db(
         Depends(get_db_session),
     ],
 ):
+    """
+    Получение доступа к БД с пользователями.
+
+    :param session: Сессия БД
+    """
     yield User.get_db_user(session=session)
 
 
@@ -36,6 +46,12 @@ async def get_user_manager(
     ],
     background_tasks: BackgroundTasks,
 ):
+    """
+    Получение менеджера пользователей.
+
+    :param users_db: БД с пользователями
+    :param background_tasks: Задачи в фоновом режиме
+    """
     yield UserManager(
         users_db,
         background_tasks=background_tasks,

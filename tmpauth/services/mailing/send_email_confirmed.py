@@ -1,13 +1,14 @@
 from textwrap import dedent
 
-from jinja_templates import templates
 from tmpauth.db.models import User
+from tmpauth.jinja_templates import templates
 from tmpauth.services.mailing.send_email import send_email
 
 
 async def send_email_confirmed(
     user: User,
 ):
+    """Send email confirmed email."""
     recipient = user.email
     subject = "Email confirmed"
 
@@ -19,7 +20,7 @@ async def send_email_confirmed(
 
         Your site admin,
         © 2025.
-        """
+        """,
     )
 
     template = templates.get_template("mailing/email-verify/email-verified.html")

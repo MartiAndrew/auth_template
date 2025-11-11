@@ -32,5 +32,7 @@ class UserUpdate(schemas.BaseUserUpdate):
 
 
 class UserRegisteredNotification(BaseModel):
+    """Схема для уведомления о регистрации пользователя."""
+
     user: UserRead
     ts: int

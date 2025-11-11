@@ -15,7 +15,7 @@ class WebSettings(BaseSettings):
         extra="ignore",
     )
 
-    host: str = "127.0.0.1"
+    host: str = "0.0.0.0"
     port: int = 8000
     # количество веб-воркеров
     workers_count: int = 1

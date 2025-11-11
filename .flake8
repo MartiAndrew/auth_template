@@ -81,6 +81,12 @@ ignore =
   WPS203
   ; Probable insecure usage of temp file/directory
   S108
+  ; Found magic number
+  WPS432
+  ; Found wrong metadata variable: __all__
+  WPS410
+  ; Found multi-line function type annotation
+  WPS320
 
 per-file-ignores =
   ; all tests

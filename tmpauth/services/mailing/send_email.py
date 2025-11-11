@@ -16,7 +16,7 @@ async def send_email(
     Отправка почты получателю.
 
     :param recipient: Получатель
-    : param subject: Тема письма
+    :param subject: Тема письма
     :param plain_content: Текст письма в формате plain
     :param html_content: Текст письма в формате html
     """

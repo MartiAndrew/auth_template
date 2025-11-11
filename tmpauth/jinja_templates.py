@@ -2,8 +2,8 @@ __all__ = ("templates",)
 
 from starlette.templating import Jinja2Templates
 
-from configuration.constants import TEMPLATE_PATH
+from configuration.constants import SERVICE_PATH
 
 templates = Jinja2Templates(
-    directory=TEMPLATE_PATH,
+    directory=SERVICE_PATH / "templates",
 )
