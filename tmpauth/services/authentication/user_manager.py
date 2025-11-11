@@ -8,6 +8,7 @@ from tmpauth.db.models import User
 
 from configuration.settings import settings
 from configuration.types import UserIdType
+from tmpauth.services.mailing.send_email_confirmed import send_email_confirmed
 from tmpauth.services.mailing.send_verification_email import send_verification_email
 
 if TYPE_CHECKING:
@@ -64,10 +65,10 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
     ):
         logger.warning(f"User {user.id} has been verified")
 
-        # self.background_tasks.add_task(
-        #     send_email_confirmed,
-        #     user=user,
-        # )
+        self.background_tasks.add_task(
+            send_email_confirmed,
+            user=user,
+        )
 
     async def on_after_request_verify(
         self,
