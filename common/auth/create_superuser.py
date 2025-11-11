@@ -4,6 +4,8 @@ from os import getenv
 from fastapi_users.exceptions import UserAlreadyExists
 from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
+
+from configuration.settings import settings
 from tmpauth.db.models import User
 from tmpauth.db.schemas.user import UserCreate
 from tmpauth.services.authentication.dependencies import get_user_manager, get_users_db
@@ -13,7 +15,7 @@ get_users_db_context = contextlib.asynccontextmanager(get_users_db)
 get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
 
-default_email = getenv("DEFAULT_EMAIL", "admin@admin.com")
+default_email = getenv("DEFAULT_EMAIL", settings.mail.admin_email)
 default_password = getenv("DEFAULT_PASSWORD", "admin")
 default_nickname = "admin"
 default_is_active = True
@@ -25,6 +27,7 @@ async def create_user(
     user_manager: UserManager,
     user_create: UserCreate,
 ) -> User:
+    """Создание пользователя."""
     user = await user_manager.create(
         user_create=user_create,
         safe=False,
@@ -40,6 +43,7 @@ async def create_superuser(
     is_superuser: bool = default_is_superuser,
     is_verified: bool = default_is_verified,
 ):
+    """Создание суперпользователя."""
     user_create = UserCreate(
         email=email,
         password=password,

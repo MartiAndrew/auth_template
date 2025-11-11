@@ -13,15 +13,29 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - ../.env
+      - ./.env
     depends_on:
       - pg_db
+
+  maildev:
+    image: maildev/maildev
+    environment:
+      - TZ=Europe/Moscow
+      - MAILDEV_WEB_PORT=1080
+      - MAILDEV_SMTP_PORT=1025
+    ports:
+      - "8080:1080"
+      - "1025:1025"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
 
   pg_db:
     image: postgres:13
     container_name: tmpauth-pg-db
     env_file:
-      - ../.env
+      - ./.env
     volumes:
       - tmpauth-pd-db-data:/var/lib/postgresql/data
     restart: always

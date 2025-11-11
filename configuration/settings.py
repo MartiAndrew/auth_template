@@ -11,6 +11,7 @@ from common.utils.paths import PROJECT_ROOT, TEMP_DIR
 from configuration.app_settings.auth_settings import AuthSettings
 from configuration.app_settings.locale_settings import LocaleSettings
 from configuration.app_settings.logging_settings import LoggingSettings
+from configuration.app_settings.mail_settings import MailSettings
 from configuration.app_settings.sentry_settings import SentrySettings
 from configuration.app_settings.sqlalchemy_db_settings import SQLAlchemyDbSettings
 from configuration.app_settings.telemetry_settings import TelemetrySettings
@@ -56,6 +57,8 @@ class Settings(BaseSettings):
     prometheus_dir: Path = TEMP_DIR.joinpath("prom")
     # Auth
     auth: AuthSettings = AuthSettings()
+    # Mail
+    mail: MailSettings = MailSettings()
     # Localization
     locale: LocaleSettings = LocaleSettings()
     # Не удалять строчку, по ней идет поиск

@@ -56,6 +56,18 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
             f"User {user.id} has forgot their password. Reset token: {token}",
         )
 
+    async def on_after_verify(
+        self,
+        user: User,
+        request: Optional["Request"] = None,
+    ):
+        logger.warning(f"User {user.id} has been verified")
+
+        # self.background_tasks.add_task(
+        #     send_email_confirmed,
+        #     user=user,
+        # )
+
     async def on_after_request_verify(
         self,
         user: User,
@@ -72,16 +84,4 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
         #     send_verification_email,
         #     user=user,
         #     verification_link=str(verification_link),
-        # )
-
-    async def on_after_verify(
-        self,
-        user: User,
-        request: Optional["Request"] = None,
-    ):
-        logger.warning(f"User {user.id} has been verified")
-
-        # self.background_tasks.add_task(
-        #     send_email_confirmed,
-        #     user=user,
         # )
