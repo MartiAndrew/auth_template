@@ -24,3 +24,5 @@ class AuthSettings(BaseSettings):
 
     # token_url for transport
     bearer_token_url: str = f"{SERVICE_NAME_LOWER}/auth/login"
+
+    require_email_verification: bool = False
