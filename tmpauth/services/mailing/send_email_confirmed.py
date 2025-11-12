@@ -8,13 +8,17 @@ from tmpauth.services.mailing.send_email import send_email
 async def send_email_confirmed(
     user: User,
 ):
-    """Send email confirmed email."""
+    """
+    Отправка письма о подтверждении email.
+
+    :param user: пользователь
+    """
     recipient = user.email
     subject = "Email confirmed"
 
     plain_content = dedent(
         f"""\
-        Dear {recipient},
+        Dear {recipient},  # noqa: WPS318
 
         Your email has been confirmed.
 

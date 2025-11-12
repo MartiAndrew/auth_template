@@ -18,6 +18,10 @@ class AuthSettings(BaseSettings):
     # время жизни access токена
     lifetime_seconds: int = 3600
 
+    cookie_max_age: int = 3600
+
+    cookie_secure: bool = False
+
     reset_password_token_secret: str = ""
 
     verification_token_secret: str = ""

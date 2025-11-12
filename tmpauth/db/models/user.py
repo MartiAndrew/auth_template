@@ -16,13 +16,20 @@ class User(Base, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
     """Модель пользователя."""
 
     nickname: Mapped[str | None] = mapped_column(
-        String(length=25), unique=True, comment="Никнейм", nullable=True,
+        String(length=25),
+        unique=True,
+        comment="Никнейм",
+        nullable=True,
     )
     avatar: Mapped[str | None] = mapped_column(
-        String(length=250), comment="Ссылка на аватар", nullable=True,
+        String(length=250),
+        comment="Ссылка на аватар",
+        nullable=True,
     )
     about: Mapped[str | None] = mapped_column(
-        String(length=150), comment="О себе", nullable=True,
+        String(length=150),
+        comment="О себе",
+        nullable=True,
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

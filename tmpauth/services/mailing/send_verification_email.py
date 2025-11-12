@@ -9,12 +9,18 @@ async def send_verification_email(
     user: User,
     verification_link: str,
 ):
+    """
+    Отправляет письмо с подтверждением email.
+
+    :param user: Пользователь
+    :param verification_link: Ссылка для подтверждения email
+    """
     recipient = user.email
     subject = "Confirm your email for site.com"
 
     plain_content = dedent(
         f"""\
-        Dear {recipient},
+        Dear {recipient},  # noqa: WPS318
 
         Please follow the link to verify your email:
         {verification_link}

@@ -10,6 +10,7 @@ from prometheus_fastapi_instrumentator.instrumentation import (
 from pydantic_core import ValidationError
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.staticfiles import StaticFiles
+from tmpauth.services.authentication.views import router as views_router
 from tmpauth.web import lifetime
 from tmpauth.web.api.router import api_router
 from tmpauth.web.exception_handlers import validation_exception_handler
@@ -49,6 +50,7 @@ def init_app() -> FastAPI:  # noqa: WPS213
     init_sentry()
 
     app.include_router(router=api_router, prefix="/api")
+    app.include_router(router=views_router)
 
     app.state.locales_gettext = get_locales()
 

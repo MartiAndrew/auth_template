@@ -35,17 +35,13 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):  # type: i
         user: User,
         request: Optional["Request"] = None,
     ):
-        # if self.background_tasks:
-        #     self.background_tasks.add_task(
-        #         FastAPICache.clear,
-        #         namespace=settings.cache.namespace.users_list,
-        #     )
-        # else:
-        #     await FastAPICache.clear(
-        #         namespace=settings.cache.namespace.users_list,
-        #     )
+        """
+        Событие после регистрации пользователя.
+
+        :param user: Пользователь.
+        :param request: Запрос.
+        """
         logger.warning(f"User {user.id} has registered.")
-        # await send_new_user_notification(user)
 
     async def on_after_forgot_password(
         self,
@@ -53,6 +49,13 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):  # type: i
         token: str,
         request: Optional["Request"] = None,
     ):
+        """
+        Событие после восстановления пароля.
+
+        :param user: Пользователь.
+        :param token: Токен.
+        :param request: Запрос.
+        """
         logger.warning(
             f"User {user.id} has forgot their password. Reset token: {token}",
         )
@@ -62,12 +65,19 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):  # type: i
         user: User,
         request: Optional["Request"] = None,
     ):
+        """
+        Событие после верификации пользователя.
+
+        :param user: Пользователь.
+        :param request: Запрос.
+        """
         logger.warning(f"User {user.id} has been verified")
 
-        self.background_tasks.add_task(
-            send_email_confirmed,
-            user=user,
-        )
+        if self.background_tasks:
+            self.background_tasks.add_task(
+                send_email_confirmed,
+                user=user,
+            )
 
     async def on_after_request_verify(
         self,
@@ -75,14 +85,23 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):  # type: i
         token: str,
         request: Optional["Request"] = None,
     ):
+        """
+        Событие после запроса верификации пользователя.
+
+        :param user: Пользователь.
+        :param token: Токен.
+        :param request: Запрос.
+        """
         logger.warning(
             f"Verification requested for user {user.id}. Verification token: {token}",
         )
-        verification_link = request.url_for("verify_email").replace_query_params(
-            token=token,
-        )
-        self.background_tasks.add_task(
-            send_verification_email,
-            user=user,
-            verification_link=str(verification_link),
-        )
+        if request:
+            verification_link = request.url_for("verify_email").replace_query_params(
+                token=token,
+            )
+            if self.background_tasks:
+                self.background_tasks.add_task(
+                    send_verification_email,
+                    user=user,
+                    verification_link=str(verification_link),
+                )
