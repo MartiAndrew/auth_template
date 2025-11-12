@@ -15,7 +15,8 @@ router = APIRouter(prefix="/home", tags=["home"])
     name="home",
 )
 def home(
-    request: Request, user: Annotated[User, Depends(current_active_user)],
+    request: Request,
+    user: Annotated[User, Depends(current_active_user)],
 ):
     """
     Home page.
